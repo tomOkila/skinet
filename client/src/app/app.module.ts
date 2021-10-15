@@ -9,6 +9,8 @@ import { CoreModule } from 'src/core/core.module';
 import { ShopModule } from 'src/shop/shop.module';
 import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from 'src/core/interceptors/error.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from 'src/core/interceptors/loading.interceptors';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,12 @@ import { ErrorInterceptor } from 'src/core/interceptors/error.interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
-    HomeModule
+    HomeModule,
+    NgxSpinnerModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS,useClass: ErrorInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS,useClass: ErrorInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS,useClass: LoadingInterceptor, multi:true}
   ],
   bootstrap: [AppComponent]
 })
